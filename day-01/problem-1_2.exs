@@ -10,7 +10,7 @@ defmodule AdventOfCode do
         [right | right_acc]
       }
     end)
-    |> then(fn {left, right} -> 
+    |> then(fn {left, right} ->
       frequencies = Enum.frequencies(right)
       Enum.map(left, fn num -> {num, Map.get(frequencies, num, 0)} end)
     end)
@@ -28,8 +28,6 @@ defmodule AdventOfCode do
   end
 end
 
-similarity = AdventOfCode.solve("input.txt")
+solution = AdventOfCode.solve("input.txt")
 
-IO.puts(similarity)
-
-
+IO.puts(solution)

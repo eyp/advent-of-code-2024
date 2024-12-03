@@ -16,7 +16,7 @@ defmodule AdventOfCode do
     |> calculate_distance()
   end
 
-defp parse_line(line) do
+  defp parse_line(line) do
     case String.split(line) do
       [left, right] ->
         {String.to_integer(left), String.to_integer(right)}
@@ -25,16 +25,14 @@ defp parse_line(line) do
     end
   end
 
-defp calculate_distance({left_numbers, right_numbers}) do
+  defp calculate_distance({left_numbers, right_numbers}) do
     Enum.zip_reduce(left_numbers, right_numbers, 0, fn left, right, acc ->
-        sum = abs(right - left)
-        acc + sum
+      sum = abs(right - left)
+      acc + sum
     end)
   end
 end
 
-distance = AdventOfCode.solve("input.txt")
+solution = AdventOfCode.solve("input.txt")
 
-IO.puts(distance)
-
-
+IO.puts(solution)
