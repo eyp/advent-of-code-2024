@@ -17,8 +17,8 @@ defmodule AdventOfCode do
   defp is_safe(numbers) when length(numbers) <= 1, do: true
 
   defp is_safe(numbers) do
-    differences = get_step_differences(numbers)
-    are_step_increments_safe(differences) and are_steps_increasing_or_decreasing(differences)
+    step_differences = get_step_differences(numbers)
+    are_step_increments_safe(step_differences) and are_steps_increasing_or_decreasing(step_differences)
   end
 
   defp get_step_differences(numbers) do
@@ -27,12 +27,12 @@ defmodule AdventOfCode do
     |> Enum.map(fn [a, b] -> b - a end)
   end
 
-  defp are_steps_increasing_or_decreasing(diffs) do
-    Enum.all?(diffs, &(&1 > 0)) or Enum.all?(diffs, &(&1 < 0))
+  defp are_steps_increasing_or_decreasing(differences) do
+    Enum.all?(differences, &(&1 > 0)) or Enum.all?(differences, &(&1 < 0))
   end
 
-  def are_step_increments_safe(diffs) do
-    Enum.all?(diffs, &(abs(&1) <= 3))
+  def are_step_increments_safe(differences) do
+    Enum.all?(differences, &(abs(&1) <= 3))
   end
 end
 
