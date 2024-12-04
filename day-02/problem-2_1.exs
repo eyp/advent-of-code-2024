@@ -17,18 +17,22 @@ defmodule AdventOfCode do
   defp is_safe(numbers) when length(numbers) <= 1, do: true
 
   defp is_safe(numbers) do
+    differences = get_step_differences(numbers)
+    are_step_increments_safe(differences) and are_steps_increasing_or_decreasing(differences)
+  end
+
+  defp get_step_differences(numbers) do
     numbers
     |> Enum.chunk_every(2, 1, :discard)
-    |> Enum.all?(fn [a, b] -> abs(b - a) <= 3 end)
-    |> case do
-      false -> false
-      true ->
-        diffs = numbers
-                |> Enum.chunk_every(2, 1, :discard)
-                |> Enum.map(fn [a, b] -> b - a end)
+    |> Enum.map(fn [a, b] -> b - a end)
+  end
 
-        Enum.all?(diffs, &(&1 > 0)) or Enum.all?(diffs, &(&1 < 0))
-    end
+  defp are_steps_increasing_or_decreasing(diffs) do
+    Enum.all?(diffs, &(&1 > 0)) or Enum.all?(diffs, &(&1 < 0))
+  end
+
+  def are_step_increments_safe(diffs) do
+    Enum.all?(diffs, &(abs(&1) <= 3))
   end
 end
 
